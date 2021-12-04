@@ -12,7 +12,18 @@
   border-radius: 10px;
 }
 
+h2 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
+p {
+  margin-bottom: 0;
+}
+
+input {
+  width: 400px;
+}
 
 .App-header {
   background-color: #282c34;
