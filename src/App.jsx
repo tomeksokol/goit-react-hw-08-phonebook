@@ -1,5 +1,5 @@
 import './App.css';
-import Form from './components/form/Form';
+import Phonebook from './components/phonebook/Phonebook';
 import React, { Component } from "react";
 
 class App extends Component {
@@ -12,7 +12,7 @@ class App extends Component {
   return (
     <div className="App">
       <header className="App-header">
-        <Form  />
+        <Phonebook  />
       </header>
     </div>
   );
