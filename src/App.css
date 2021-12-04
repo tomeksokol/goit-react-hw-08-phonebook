@@ -4,7 +4,7 @@
 
 .form-container {
   width: 1000px;
-  height: 700px;
+  min-height: 800px;
   background-color: white;
   color: black;
   text-align: left;

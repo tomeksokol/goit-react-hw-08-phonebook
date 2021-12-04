@@ -12,25 +12,37 @@ class Form extends Component {
     // ],
     contacts: this.props.contacts,
     name: this.props.name,
+    number: '',
   }
  
-  inputID = nanoid();
+  inputNameID = nanoid();
+  inputTelID = nanoid();
 
   addContact = (e) => {
     e.preventDefault();
     this.setState((state) => ({
       ...state,
       name: e.target.value,
+      number: e.target.value,
+    }))
+  }
+
+  addNumber = (e) => {
+    e.preventDefault();
+    this.setState((state) => ({
+      ...state,
+      number: e.target.value,
     }))
   }
 
   saveContact = (e) => {
     e.preventDefault();
+    const form = e.currentTarget;
     this.setState((state) => ({
-      contacts: [...state.contacts, {name: this.state.name, id: nanoid()}],
+      contacts: [...state.contacts, {id: nanoid(), name: this.state.name, number: this.state.number }],
     }))
     console.log(this.state.contacts);
-
+    form.reset();
   }
 
   render() {
@@ -40,26 +52,41 @@ class Form extends Component {
           <h2>Phonebook</h2>
           <form onSubmit={this.saveContact}>
           <fieldset>
-            <label htmlFor={this.inputID}>Name</label>
+            <label htmlFor={this.inputNameID}>Name</label>
             <br />
             <input
               type="text"
+              autoComplete="off"
               name="name"
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               required
-              value={this.state.name}
               onChange={this.addContact}
-              id={this.inputID}
+              id={this.inputNameID}
             />
+            <br />
+            <br />
+            <label htmlFor={this.inputTelID}>Number</label>
+            <br />
+            <input
+              type="tel"
+              autoComplete="off"
+              name="number"
+              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+              required
+              onChange={this.addNumber}
+              id={this.inputTelID}
+            />
+            <br />
             <br />
             <button type="submit">Add contact</button>
           </fieldset>
           </form>
           <h2>Contacts</h2>
           <ul>
-            {this.state.contacts.map(({ name, id }) => (
-              <li key={id}>{name}</li>
+            {this.state.contacts.map(({ id, name, number }) => (
+              <li key={id}>{name}: {number}</li>
             ))}
           </ul>
         </div>
