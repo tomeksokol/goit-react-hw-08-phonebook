@@ -40,12 +40,17 @@ class Phonebook extends Component {
   saveContact = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
-    this.setState((state) => ({
-      contacts: [
-        ...state.contacts,
-        { id: nanoid(), name: this.state.name, number: this.state.number },
-      ],
-    }));
+    let arrayOfNames = this.state.contacts.map((arr) => arr.name);
+    if (arrayOfNames.includes(this.state.name)) {
+      alert(`${this.state.name} is already in contacts`);
+    } else {
+      this.setState((state) => ({
+        contacts: [
+          ...state.contacts,
+          { id: nanoid(), name: this.state.name, number: this.state.number },
+        ],
+      }));
+    }
     form.reset();
   };
 
