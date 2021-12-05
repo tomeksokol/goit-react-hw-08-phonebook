@@ -10,8 +10,6 @@ class Phonebook extends Component {
       { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
       { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
       { id: "id-22", name: "hermione kline", number: "443-89-12" },
-      { id: "id-3", name: "Eden Clements", number: "645-17-79" },
-      { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
     ],
     name: this.props.name,
     number: "",
@@ -22,6 +20,7 @@ class Phonebook extends Component {
   inputNameID = nanoid();
   inputTelID = nanoid();
 
+ 
   addContact = (e) => {
     e.preventDefault();
     this.setState((state) => ({
@@ -52,6 +51,8 @@ class Phonebook extends Component {
           { id: nanoid(), name: this.state.name, number: this.state.number },
         ],
       }));
+      this.addContactToLocalStore(this.state.name, this.state.number);
+      // this.addNewContactToLocalStore(this.state.name);
     }
     form.reset();
   };
@@ -69,6 +70,28 @@ class Phonebook extends Component {
       ...state,
       contacts: this.state.contacts.filter(({ id }) => id !== idNumber),
     }))
+  }
+
+  addContactToLocalStore = () => {
+    localStorage.setItem("phoneContacts", JSON.stringify(this.state.contacts));
+  }
+
+   // addNewContactToLocalStore = (newName) => {
+  //   const oldLocalStoreContacts = localStorage.getItem("contact") || [];
+  //   const newLocalStoreContact = [...oldLocalStoreContacts, newName];
+  //   localStorage.setItem("contact", newLocalStoreContact)
+  // }
+
+  componentDidMount() {
+    let getContacts = localStorage.getItem("phoneContacts");
+
+    getContacts
+    ? this.setState({ contacts: JSON.parse(getContacts) })
+    : this.addContactToLocalStore();
+  }
+
+  componentDidUpdate() {
+    this.addContactToLocalStore();
   }
 
   render() {
