@@ -25,6 +25,12 @@ input {
   width: 400px;
 }
 
+.del-button {
+  display: inline-block;
+  padding: 5px;
+  margin-left: 25px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

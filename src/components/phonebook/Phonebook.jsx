@@ -16,6 +16,7 @@ class Phonebook extends Component {
     name: this.props.name,
     number: "",
     filter: "",
+    id: "",
   };
 
   inputNameID = nanoid();
@@ -36,6 +37,7 @@ class Phonebook extends Component {
       number: e.target.value,
     }));
   };
+
 
   saveContact = (e) => {
     e.preventDefault();
@@ -62,6 +64,13 @@ class Phonebook extends Component {
     }));
   };
 
+  deleteContact = (idNumber) => {
+    this.setState((state) => ({
+      ...state,
+      contacts: this.state.contacts.filter(({ id }) => id !== idNumber),
+    }))
+  }
+
   render() {
     return (
       <div>
@@ -80,6 +89,7 @@ class Phonebook extends Component {
           <ContactList
             filter={this.state.filter}
             contacts={this.state.contacts}
+            deleteContact={this.deleteContact}
           />
         </div>
       </div>

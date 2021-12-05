@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ContactList = ({ filter, contacts }) => {
+const ContactList = ({ filter, contacts, deleteContact }) => {
   return (
     <div>
       <ul>
@@ -8,6 +8,7 @@ const ContactList = ({ filter, contacts }) => {
             ? contacts.map(({ id, name, number }) => (
                 <li key={id}>
                   {name}: {number}
+                  <button type="button" className="del-button" onClick={() => deleteContact(id)}>Delete</button>
                 </li>
               ))
             : contacts
@@ -16,7 +17,8 @@ const ContactList = ({ filter, contacts }) => {
               )
               .map(({ id, name, number }) => (
                 <li key={id}>
-                  {name}: {number}
+                  {name}: {number} 
+                  <button type="button" className="del-button" onClick={() => deleteContact(id)}>Delete</button>
                 </li>
               ))}
         </ul>
