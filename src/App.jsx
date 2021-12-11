@@ -1,21 +1,18 @@
 import "./App.css";
 import Phonebook from "./components/phonebook/Phonebook";
-import React, { Component } from "react";
+import React from "react";
 
-class App extends Component {
-  state = {
-    contacts: [],
-    name: "",
-  };
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <Phonebook />
-        </header>
-      </div>
-    );
-  }
+function App() {
+ 
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <Phonebook />
+      </header>
+    </div>
+  );
+
 }
 
 export default App;
