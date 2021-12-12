@@ -8,7 +8,7 @@ const Phonebook = () => {
 
   //states
 
-  const [contacts, setContacts] = useState(JSON.parse(window.localStorage.getItem("phoneContacts")) ?? [],);
+  const [contacts, setContacts] = useState(JSON.parse(window.localStorage.getItem("phoneContacts")) ?? []);
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [filter, setFilter] = useState("");
@@ -55,24 +55,6 @@ const Phonebook = () => {
   }, [contacts])
 
 
-  // const addContactToLocalStore = () => {
-  //   localStorage.setItem("phoneContacts", JSON.stringify(this.state.contacts));
-  // }
-
-
-  // componentDidMount() {
-  //   let getContacts = localStorage.getItem("phoneContacts");
-
-  //   getContacts
-  //   ? this.setState({ contacts: JSON.parse(getContacts) })
-  //   : this.addContactToLocalStore();
-  // }
-
-  // componentDidUpdate() {
-  //   this.addContactToLocalStore();
-  // }
-
- 
     return (
       <div>
         <div className="form-container">
