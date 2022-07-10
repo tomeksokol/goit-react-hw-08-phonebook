@@ -1,8 +1,17 @@
 import React from "react";
+import { Button } from "@mui/material";
+import { Loading } from "notiflix";
+import { useSelector } from "react-redux";
 import { usePostContactMutation } from "../../utils/api";
+import { loadFromSessionStorage } from "../../utils/sessionStorage";
 
-const ContactForm = () => {
+export const ContactForm = () => {
   const [submitForm] = usePostContactMutation();
+
+  //logging user//
+  const currentUserId =
+    useSelector((state) => state.loggedUser.id) ||
+    loadFromSessionStorage("USER")[0];
 
   return (
     <div>
@@ -13,7 +22,8 @@ const ContactForm = () => {
           const phone = form.number.value;
           e.preventDefault();
           form.reset();
-          return submitForm({ name, phone });
+          submitForm([currentUserId, { name, phone }]);
+          Loading.hourglass("Adding contact...");
         }}>
         <fieldset>
           <label>Name</label>
@@ -42,11 +52,10 @@ const ContactForm = () => {
           />
           <br />
           <br />
-          <button type="submit">Add contact</button>
+          <Button variant="contained" type="submit">Add contact</Button>
         </fieldset>
       </form>
     </div>
   );
 };
 
-export default ContactForm;

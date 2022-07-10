@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  background-color:antiquewhite;
+  background-size: cover;
+  min-height: 100vh;
 }
 
 .form-container {
@@ -40,4 +43,8 @@ input {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+a {
+  color: rgb(87, 151, 91);
 }

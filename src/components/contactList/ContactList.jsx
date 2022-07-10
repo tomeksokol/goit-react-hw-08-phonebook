@@ -1,14 +1,18 @@
 import React from "react";
+
+import { List } from "@mui/material";
 import { Contact } from "../contacts/Contact";
 
-const ContactList = () => {
+export const ContactList = () => {
   return (
     <div>
-      <ul>
+      <List
+        sx={{
+          maxWidth: "400px",
+          margin: "0 auto",
+        }}>
         <Contact />
-      </ul>
+      </List>
     </div>
   );
 };
-
-export default ContactList;

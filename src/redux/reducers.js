@@ -1,8 +1,12 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { filterContacts } from "./actions";
+import { filterContacts, userLoggedIn } from "./actions";
 
 const filterReducer = createReducer("", {
   [filterContacts]: (state, { payload }) => payload,
 });
 
-export { filterReducer };
+const userLoginReducer = createReducer(false, {
+  [userLoggedIn]: (state, { payload }) => payload,
+});
+
+export { filterReducer, userLoginReducer };

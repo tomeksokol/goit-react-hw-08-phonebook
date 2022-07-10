@@ -1,8 +1,9 @@
 import React from "react";
+
 import { useSelector, useDispatch } from "react-redux";
 import { filterContacts } from "../../redux/actions";
 
-const Filter = () => {
+export const Filter = () => {
   const filter = useSelector((state) => state.filter);
   const dispatch = useDispatch();
 
@@ -25,5 +26,3 @@ const Filter = () => {
     </div>
   );
 };
-
-export default Filter;

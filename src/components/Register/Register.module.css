@@ -1,0 +1,13 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: 0 auto;
+  max-width: 80%;
+}
+
+.LoginPage {
+  background-color: rgb(255, 255, 255, 70%);
+  border-radius: 15%;
+  color: black;
+}

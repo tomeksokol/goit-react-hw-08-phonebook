@@ -1,9 +1,16 @@
 import React from "react";
+import { IconButton, ListItem } from "@mui/material";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { Loading } from "notiflix";
+
 import { useSelector } from "react-redux";
 import {
   useDeleteContactByIdMutation,
   useGetContactsQuery,
 } from "../../utils/api";
+
+import { loadFromSessionStorage } from "../../utils/sessionStorage";
+import Loader from "../Loader/Loader";
 
 const getVisibleContacts = (contacts, filter) => {
   const normalizedFilter = filter.toLowerCase().trim();
@@ -15,24 +22,46 @@ const getVisibleContacts = (contacts, filter) => {
   );
 };
 export const Contact = () => {
-  const { data, error, isLoading } = useGetContactsQuery();
+  const currentUserId =
+    useSelector((state) => state.loggedUser.id) ||
+    loadFromSessionStorage("USER")[0];
+
+  const { data, error, isLoading } = useGetContactsQuery(currentUserId);
   const [deleteContact] = useDeleteContactByIdMutation();
+
   const filter = useSelector((state) => state.filter);
+
+  const onDelete = (id) => {
+    deleteContact([currentUserId, id]);
+    Loading.hourglass("Deleting contact...");
+  };
+
+  Loading.remove(1000);
+
   return (
     <>
       {error ? (
         <>Oh no, there was an error</>
       ) : isLoading ? (
-        <>Loading...</>
+        <Loader />
       ) : data ? (
         <>
           {getVisibleContacts(data, filter).map(({ id, name, phone }) => (
-            <li key={id}>
+            <ListItem
+              sx={{
+                justifyContent: "space-between",
+                borderBottom: "3px solid",
+              }}
+              key={id}>
               {name} : {phone}
-              <button type="button" className="del-button" onClick={() => deleteContact(id)}>
-                Delete
-              </button>
-            </li>
+              <IconButton
+                color="error"
+                variant="outlined"
+                type="button"
+                onClick={() => onDelete(id)}>
+                <DeleteForeverIcon />
+              </IconButton>
+            </ListItem>
           ))}
         </>
       ) : null}
